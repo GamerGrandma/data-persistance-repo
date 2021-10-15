@@ -15,6 +15,7 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
     public Text NameText;
     public Text BestScoreText;
+    //public Text BestScoreName;
     
     private bool m_Started = false;
     public static int m_Points;
@@ -73,7 +74,6 @@ public class MainManager : MonoBehaviour
     }
     void AddName()
     {
-        //name = MenuUI.playerName;
         NameText.GetComponent<Text>().text = "Name : " + MenuUI.playerName;
     }
 
@@ -99,7 +99,8 @@ public class MainManager : MonoBehaviour
 
     [System.Serializable]
     class SaveData
-    { public int highScore; }
+    { public int highScore;
+    //add a string to save name}
 
     public void SaveBestScore()
     {
@@ -118,8 +119,10 @@ public class MainManager : MonoBehaviour
             highScore = data.highScore;
         }
         BestScoreText.text = "Best Score : " + highScore;
+            //show name of best score here also
     }
-
+        //How to save multiple high scores
+    //add a quit button to return to start menu
     public void GameOver()
     {
         SaveBestScore();
