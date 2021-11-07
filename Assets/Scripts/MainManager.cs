@@ -89,13 +89,15 @@ public class MainManager : MonoBehaviour
             HighscoreDate.highScore = m_Points;
             BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
         }
-        //return;
         else if(m_Points < HighscoreDate.highScore)
         {
             BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
         }
     }
-
+    public void ReturnToMenuScene()
+    {
+        SceneManager.LoadScene(0);
+    }
     [System.Serializable]
     class SaveData
     { public int highScore; }
