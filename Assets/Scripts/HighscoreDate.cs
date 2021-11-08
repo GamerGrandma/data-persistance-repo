@@ -9,5 +9,4 @@ public static class HighscoreDate
     public static int highScore;
     public static string playerName;
     public static string highScoreName;
-
 }

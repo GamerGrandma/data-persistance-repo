@@ -15,6 +15,7 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
     public Text NameText;
     public Text BestScoreText;
+    public Text PlayerNameText;
     
     private bool m_Started = false;
     public static int m_Points;
@@ -26,6 +27,7 @@ public class MainManager : MonoBehaviour
     {
         highScore = 0;
         LoadBestScore();
+        PlayerNameText.GetComponent<Text>().text = "Player Name : " + HighscoreDate.playerName;
     }
     
     void Start()
