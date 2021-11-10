@@ -12,7 +12,7 @@ public class Score
 
     public Score(string name, float score)
     {
-        name = HighscoreDate.highScoreName;
-        score = HighscoreDate.highScore;
+        this.name = name;
+        this.score = score;
     }
 }

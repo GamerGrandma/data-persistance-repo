@@ -2058,8 +2058,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+      - m_Target: {fileID: 1053697266}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: ReadStringInput
         m_Mode: 0
         m_Arguments:
