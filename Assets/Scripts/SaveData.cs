@@ -5,8 +5,8 @@ using System.IO;
 
 public class SaveData
 {
-    public int highScore, highScore2, highScore3, highScore4, highScore5;
-    public string highScoreName, highScoreName2, highScoreName3, highScoreName4, highScoreName5;
+    public int highScore;
+    public string highScoreName;
 
     //method to save highscore data.
     public static void SaveBestScore()
@@ -14,14 +14,6 @@ public class SaveData
         SaveData data = new SaveData();
         data.highScore = HighscoreDate.highScore;
         data.highScoreName = HighscoreDate.highScoreName;
-    /*data.highScore2 = highScore2;
-    data.highScoreName2 = highScoreName2;
-    data.highScore3 = highScore3;
-    data.highScoreName3 = highScoreName3;
-    data.highScore4 = highScore4;
-    data.highScoreName4 = highScoreName4;
-    data.highScore5 = highScore5;
-    data.highScoreName5 = highScoreName5;*/
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
@@ -36,7 +28,5 @@ public class SaveData
             HighscoreDate.highScore = data.highScore;
             HighscoreDate.highScoreName = data.highScoreName;
         }
-        //BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
-        //NameText.text = "Name :" + highScoreName;
     }
 }

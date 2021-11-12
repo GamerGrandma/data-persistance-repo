@@ -20,14 +20,19 @@ public class MainManager : MonoBehaviour
     private bool m_Started = false;
     public static int m_Points;
     public int highScore;
+    public string highScoreName;
+    public static string playerName;
     
     private bool m_GameOver = false;
 
     void Awake()
     {
         highScore = 0;
-        LoadBestScore();
-        PlayerNameText.GetComponent<Text>().text = "Player Name : " + HighscoreDate.playerName;
+        highScoreName = null;
+        SaveData.LoadBestScore();
+        PlayerNameText.text = "Player Name : " + HighscoreDate.playerName;
+        BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
+        NameText.text = "Name : " + HighscoreDate.highScoreName;
     }
     
     void Start()
@@ -46,7 +51,6 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        AddName();
     }
 
     private void Update()
@@ -73,10 +77,6 @@ public class MainManager : MonoBehaviour
         }
         CreateHighScore();
     }
-    void AddName()
-    {
-        NameText.GetComponent<Text>().text = "Name : " + HighscoreDate.playerName;
-    }
 
     public void AddPoint(int point)
     {
@@ -84,48 +84,36 @@ public class MainManager : MonoBehaviour
         ScoreText.text = "Score :" + m_Points;
     }
 
+    public void UpdateNameAndHighscore()
+    {
+        BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
+        NameText.text = "Name : " + HighscoreDate.highScoreName;
+    }
+
     public void CreateHighScore()
     {
         if(m_Points > HighscoreDate.highScore)
         {
             HighscoreDate.highScore = m_Points;
-            BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
+            HighscoreDate.highScoreName = HighscoreDate.playerName;
+            UpdateNameAndHighscore();
         }
         else if(m_Points < HighscoreDate.highScore)
         {
+            ScoreText.text = "Score :" + m_Points;
+            PlayerNameText.text = "Player Name : " + HighscoreDate.playerName;
             BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
+            NameText.text = "Name : " + HighscoreDate.highScoreName;
         }
     }
     public void ReturnToMenuScene()
     {
         SceneManager.LoadScene(0);
     }
-    [System.Serializable]
-    class SaveData
-    { public int highScore; }
-
-    public void SaveBestScore()
-    {
-        SaveData data = new SaveData();
-        data.highScore = highScore;
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-    }
-    public void LoadBestScore()
-    {
-        string path = Application.persistentDataPath + "/savefile.json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
-            highScore = data.highScore;
-        }
-        BestScoreText.text = "Best Score : " + highScore;
-    }
 
     public void GameOver()
     {
-        SaveBestScore();
+        SaveData.SaveBestScore();
         m_GameOver = true;
         GameOverText.SetActive(true);
     }

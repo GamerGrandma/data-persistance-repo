@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     private ScoreData sd;
     void Awake()
     {
+        SaveData.LoadBestScore();
         var json = PlayerPrefs.GetString("scores", "{}");
         sd = JsonUtility.FromJson<ScoreData>(json);
     }
