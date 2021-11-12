@@ -15,6 +15,7 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
     public Text NameText;
     public Text BestScoreText;
+    public Text PlayerNameText;
     
     private bool m_Started = false;
     public static int m_Points;
@@ -26,6 +27,7 @@ public class MainManager : MonoBehaviour
     {
         highScore = 0;
         LoadBestScore();
+        PlayerNameText.GetComponent<Text>().text = "Player Name : " + HighscoreDate.playerName;
     }
     
     void Start()
@@ -73,8 +75,7 @@ public class MainManager : MonoBehaviour
     }
     void AddName()
     {
-        //name = MenuUI.playerName;
-        NameText.GetComponent<Text>().text = "Name : " + MenuUI.playerName;
+        NameText.GetComponent<Text>().text = "Name : " + HighscoreDate.playerName;
     }
 
     public void AddPoint(int point)
@@ -85,18 +86,20 @@ public class MainManager : MonoBehaviour
 
     public void CreateHighScore()
     {
-        if(m_Points > highScore)
+        if(m_Points > HighscoreDate.highScore)
         {
-            highScore = m_Points;
-            BestScoreText.text = "Best Score : " + highScore;
+            HighscoreDate.highScore = m_Points;
+            BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
         }
-        //return;
-        else if(m_Points < highScore)
+        else if(m_Points < HighscoreDate.highScore)
         {
-            BestScoreText.text = "Best Score : " + highScore;
+            BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
         }
     }
-
+    public void ReturnToMenuScene()
+    {
+        SceneManager.LoadScene(0);
+    }
     [System.Serializable]
     class SaveData
     { public int highScore; }
