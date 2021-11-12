@@ -29,6 +29,7 @@ public class MainManager : MonoBehaviour
     {
         highScore = 0;
         highScoreName = null;
+        m_Points = 0;
         SaveData.LoadBestScore();
         PlayerNameText.text = "Player Name : " + HighscoreDate.playerName;
         BestScoreText.text = "Best Score : " + HighscoreDate.highScore;
